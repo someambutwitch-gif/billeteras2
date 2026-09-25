@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colección — Sergio Benavides</title>
+<style>
+/* =========================================================
+   SISTEMA DE DISEÑO — SERGIO BENAVIDES (S.D.B.) STUDIO
+   Minimalista · Blanco + Gris + Negro · Efectos blur
+   Tipografía única: General Sans (alternativa libre y gratuita,
+   visualmente equivalente a una grotesca geométrica de referencia —
+   no se puede incrustar una fuente con licencia comercial ajena)
+   ========================================================= */
+
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
+
+:root{
+  --bg:        #ffffff;   /* fondo principal */
+  --bg-raised: #f7f7f6;   /* paneles/franjas suaves */
+  --bg-card:   #f2f2f0;   /* placeholders */
+  --gold:      #1a1a1a;   /* "acento" — ahora negro (se mantiene el nombre de var por compatibilidad) */
+  --gold-bright:#4d4d4d;  /* acento hover — gris oscuro */
+  --cream:     #121212;   /* texto principal, oscuro sobre blanco */
+  --gray:      #8b8b86;   /* texto secundario */
+  --line:      rgba(0,0,0,0.14);
+  --line-soft: rgba(0,0,0,0.08);
+  --radius: 2px;
+  --maxw: 1320px;
+  --blur-sm: blur(6px);
+  --blur-md: blur(14px);
+  --blur-lg: blur(34px);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:'General Sans',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+ul{list-style:none;margin:0;padding:0;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;}
+
+.eyebrow{
+  font-family:'General Sans',sans-serif;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gray);
+}
+h1,h2,h3,.display{
+  font-family:'General Sans',sans-serif;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+  line-height:.98;
+  margin:0;
+  color:var(--cream);
+}
+
+/* ---------- fondos difuminados ambientales (signature) ---------- */
+.blur-blob{
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(0,0,0,0.08), rgba(0,0,0,0) 70%);
+  filter:var(--blur-lg);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ---------- placeholders de imagen (EDITAR AQUÍ) ---------- */
+.ph{
+  position:relative;
+  background:linear-gradient(150deg,#efefec,#f9f9f8 60%);
+  border:1px dashed var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:var(--gray);
+  text-align:center;
+}
+.ph::before{
+  content:attr(data-label);
+  font-family:'General Sans',sans-serif;
+  font-weight:500;
+  font-size:11px;
+  letter-spacing:.04em;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:var(--blur-sm);
+  max-width:80%;
+}
+
+/* ---------- marquee anuncios ---------- */
+.marquee{
+  background:var(--cream);
+  color:#fff;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:'General Sans',sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.marquee__track{
+  display:inline-flex;
+  animation:scroll 22s linear infinite;
+  padding:9px 0;
+}
+.marquee__track span{padding:0 26px;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:var(--blur-md);
+  -webkit-backdrop-filter:var(--blur-md);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{
+  position:relative;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;width:100%;
+}
+.nav__links{display:none;}
+.nav__logo{font-family:'General Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.01em;text-transform:uppercase;}
+.nav .nav__logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;}
+.nav__logo--mono{letter-spacing:.08em;}
+.nav__logo span{color:var(--gray);}
+.nav__icons{display:flex;gap:6px;align-items:center;}
+.icon-btn{
+  background:none;border:none;padding:6px;margin:0;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--cream);opacity:.78;transition:opacity .2s ease,color .2s ease,transform .2s ease;
+  position:relative;
+}
+.icon-btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.icon-btn:hover{opacity:1;color:#000;transform:translateY(-1px);}
+.icon-bag{margin-right:-2px;}
+.bag-count{
+  position:absolute;top:2px;right:2px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--cream);color:#fff;
+  font-family:'General Sans',sans-serif;font-weight:700;font-size:9px;
+  display:flex;align-items:center;justify-content:center;
+}
+.burger{grid-area:burger;display:inline-flex;background:none;border:none;color:var(--cream);}
+
+/* ---------- stamp (elemento firma) ---------- */
+.stamp{width:96px;height:96px;flex-shrink:0;}
+.stamp text{
+  font-family:'General Sans',sans-serif;
+  font-weight:600;
+  font-size:7.2px;
+  letter-spacing:2.4px;
+  fill:var(--gray);
+}
+.stamp .num{
+  font-family:'General Sans',sans-serif;
+  font-weight:700;
+  font-size:19px;
+  fill:var(--cream);
+}
+.stamp circle.ring{fill:none;stroke:var(--cream);stroke-width:1;}
+.stamp circle.dots{fill:none;stroke:var(--gray);stroke-width:1;stroke-dasharray:1 4.4;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;height:88vh;min-height:560px;
+  display:flex;align-items:flex-end;
+}
+.hero .ph{position:absolute;inset:0;border:none;}
+.hero__content{
+  position:relative;z-index:2;padding:0 28px 44px;
+  max-width:var(--maxw);margin:0 auto;width:100%;
+  display:flex;justify-content:flex-end;
+}
+.hero__panel{
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:var(--blur-md);
+  -webkit-backdrop-filter:var(--blur-md);
+  border:1px solid rgba(255,255,255,0.6);
+  padding:28px 30px;
+  max-width:300px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.06);
+}
+.hero__panel .eyebrow{margin-bottom:8px;}
+.hero__panel p{font-size:13px;color:var(--cream);line-height:1.6;margin:0;}
+.hero__panel a{
+  display:inline-block;margin-top:16px;font-size:12px;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--cream);
+  border-bottom:1px solid var(--cream);padding-bottom:2px;
+}
+
+/* ---------- secciones ---------- */
+section{padding:96px 0;position:relative;}
+.section__head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:40px;gap:24px;flex-wrap:wrap;position:relative;z-index:1;
+}
+.section__head h2{font-size:clamp(28px,4.4vw,50px);}
+.section__head .see-all{
+  font-family:'General Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;
+  text-transform:uppercase;border-bottom:1px solid var(--cream);color:var(--cream);padding-bottom:3px;
+}
+
+/* ---------- grid productos ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative;z-index:1;}
+.card{position:relative;}
+.card__img{aspect-ratio:3/4;position:relative;}
+.card__img .ph{position:absolute;inset:0;transition:filter .35s ease;}
+.card:hover .card__img .ph{filter:blur(3px) brightness(0.94);}
+.card__badge{
+  position:absolute;top:12px;left:12px;z-index:3;
+  font-family:'General Sans',sans-serif;font-weight:600;font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;background:rgba(255,255,255,0.85);backdrop-filter:var(--blur-sm);
+  color:var(--cream);padding:4px 9px;border:1px solid var(--line);border-radius:2px;
+}
+.card__info{padding-top:14px;}
+.card__name{font-size:14px;font-weight:500;margin-bottom:4px;}
+.card__price{font-family:'General Sans',sans-serif;font-weight:600;font-size:13px;color:var(--gray);}
+.card a.overlay{position:absolute;inset:0;z-index:2;}
+.card__cta{
+  position:absolute;inset:0;z-index:3;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.35);
+  backdrop-filter:var(--blur-md);
+  -webkit-backdrop-filter:var(--blur-md);
+  color:var(--cream);text-align:center;
+  font-family:'General Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  opacity:0;transition:opacity .3s ease;
+}
+.card:hover .card__cta{opacity:1;}
+
+/* ---------- banda hombre/mujer ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;}
+.split__panel{position:relative;height:70vh;min-height:420px;overflow:hidden;}
+.split__panel .ph{position:absolute;inset:0;border:none;transition:filter .4s ease;}
+.split__panel:hover .ph{filter:blur(2px) brightness(0.95);}
+.split__label{
+  position:absolute;bottom:36px;left:0;right:0;z-index:2;
+  text-align:center;
+}
+.split__label h3{font-size:clamp(28px,3.6vw,42px);color:var(--cream);margin-bottom:14px;}
+.split__label a{
+  font-family:'General Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(255,255,255,0.6);backdrop-filter:var(--blur-md);
+  border:1px solid rgba(255,255,255,0.7);color:var(--cream);padding:11px 28px;display:inline-block;
+  transition:.2s;
+}
+.split__label a:hover{background:var(--cream);color:#fff;}
+
+/* ---------- tiendas ---------- */
+.stores{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative;z-index:1;}
+.store{border:1px solid var(--line-soft);padding:18px;background:rgba(255,255,255,0.5);backdrop-filter:var(--blur-sm);}
+.store .ph{aspect-ratio:4/3;margin-bottom:14px;}
+.store__eyebrow{font-family:'General Sans',sans-serif;font-weight:600;font-size:10px;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;}
+.store h4{font-family:'General Sans',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;margin:6px 0 6px;}
+.store p{font-size:13px;color:var(--gray);line-height:1.5;margin:0 0 10px;}
+.store a{font-family:'General Sans',sans-serif;font-weight:600;font-size:11px;color:var(--cream);border-bottom:1px solid var(--cream);}
+
+/* ---------- newsletter ---------- */
+.newsletter{
+  text-align:center;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+  background:var(--bg-raised);
+}
+.newsletter h2{font-size:clamp(26px,4.4vw,44px);margin-bottom:18px;}
+.newsletter form{display:flex;justify-content:center;gap:0;max-width:440px;margin:0 auto;position:relative;z-index:1;}
+.newsletter input{
+  flex:1;background:rgba(255,255,255,0.7);backdrop-filter:var(--blur-sm);border:1px solid var(--line);border-right:none;
+  padding:14px 16px;color:var(--cream);font-family:'General Sans';font-size:14px;
+}
+.newsletter input::placeholder{color:var(--gray);}
+.newsletter button{
+  background:var(--cream);border:1px solid var(--cream);color:#fff;
+  padding:0 22px;font-family:'General Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+/* ---------- footer ---------- */
+footer{padding:64px 0 28px;}
+.footer__top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:56px;}
+.footer__brand .nav__logo{margin-bottom:12px;}
+.footer__brand p{color:var(--gray);font-size:13px;max-width:280px;line-height:1.6;}
+.footer__col h5{font-family:'General Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cream);margin-bottom:16px;}
+.footer__col a{display:block;color:var(--gray);font-size:13px;margin-bottom:10px;transition:color .2s;}
+.footer__col a:hover{color:var(--cream);}
+.footer__bottom{
+  border-top:1px solid var(--line-soft);padding-top:22px;
+  display:flex;justify-content:space-between;color:var(--gray);
+  font-family:'General Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;flex-wrap:wrap;gap:10px;
+}
+
+/* ---------- breadcrumb / page header (colección & producto) ---------- */
+.breadcrumb{
+  font-family:'General Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;
+  color:var(--gray);text-transform:uppercase;padding:22px 0;
+}
+.breadcrumb a:hover{color:var(--cream);}
+.breadcrumb span{margin:0 8px;color:var(--line);}
+
+.collection__head{padding:20px 0 44px;border-bottom:1px solid var(--line-soft);}
+.collection__head h1{font-size:clamp(36px,7vw,84px);}
+.collection__head p{color:var(--gray);font-size:14px;margin-top:10px;max-width:520px;}
+
+.toolbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 0;font-family:'General Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.02em;text-transform:uppercase;
+  color:var(--gray);
+}
+.toolbar select{background:var(--bg);color:var(--cream);border:1px solid var(--line);padding:8px 10px;font-family:inherit;}
+
+/* ---------- página de producto ---------- */
+.product{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;padding:16px 0 96px;}
+.product__gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start;}
+.product__gallery .ph{aspect-ratio:3/4;}
+.product__gallery .ph.full{grid-column:1/-1;aspect-ratio:16/10;}
+.product__info{position:sticky;top:96px;align-self:start;}
+.product__info .eyebrow{margin-bottom:10px;}
+.product__info h1{font-size:clamp(30px,3.6vw,42px);margin-bottom:14px;}
+.product__price{font-family:'General Sans',sans-serif;font-weight:600;color:var(--gray);font-size:19px;margin-bottom:22px;}
+.product__desc{color:var(--gray);font-size:14px;line-height:1.7;margin-bottom:28px;}
+
+.swatches{display:flex;gap:10px;margin-bottom:26px;}
+.swatch{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);cursor:pointer;}
+
+.size-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.size-row .eyebrow{margin:0;}
+.size-row a{font-family:'General Sans',sans-serif;font-weight:600;font-size:11px;color:var(--cream);border-bottom:1px solid var(--cream);}
+.sizes{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+.sizes button{
+  min-width:46px;padding:10px 6px;background:transparent;border:1px solid var(--line);
+  color:var(--cream);font-family:'General Sans',sans-serif;font-weight:500;font-size:12px;
+}
+.sizes button.active,.sizes button:hover{border-color:var(--cream);background:var(--cream);color:#fff;}
+
+.qty-row{display:flex;gap:14px;margin-bottom:16px;}
+.qty{display:flex;align-items:center;border:1px solid var(--line);}
+.qty button{background:none;border:none;color:var(--cream);width:38px;height:48px;font-size:16px;}
+.qty span{width:34px;text-align:center;font-family:'General Sans',sans-serif;font-weight:500;}
+.add-cart{
+  flex:1;background:var(--cream);border:none;color:#fff;font-weight:600;
+  font-family:'General Sans',sans-serif;letter-spacing:.04em;text-transform:uppercase;font-size:13px;
+}
+.wishlist-btn{
+  width:48px;border:1px solid var(--line);background:none;color:var(--cream);
+}
+
+.accordion{border-top:1px solid var(--line-soft);margin-top:26px;}
+.accordion details{border-bottom:1px solid var(--line-soft);padding:16px 0;}
+.accordion summary{
+  cursor:pointer;font-family:'General Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;
+  text-transform:uppercase;display:flex;justify-content:space-between;
+}
+.accordion p{color:var(--gray);font-size:13px;line-height:1.7;margin:12px 0 0;}
+
+.stamp-row{display:flex;align-items:center;gap:14px;margin-top:30px;padding-top:26px;border-top:1px solid var(--line-soft);}
+.stamp-row p{font-family:'General Sans',sans-serif;font-weight:500;font-size:11px;color:var(--gray);letter-spacing:.01em;line-height:1.6;}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .footer__top{grid-template-columns:1fr 1fr;}
+  .product{grid-template-columns:1fr;}
+  .product__info{position:static;}
+  .stores{grid-template-columns:1fr;}
+}
+/* ---------- menú móvil (burger animado + panel slide) ---------- */
+.burger{
+  background:none;border:none;color:var(--cream);
+  width:26px;height:16px;position:relative;padding:0;flex-shrink:0;
+}
+.burger span{
+  position:absolute;left:0;width:100%;height:2px;background:var(--cream);
+  transition:transform .32s cubic-bezier(.65,0,.35,1),opacity .25s ease,top .32s cubic-bezier(.65,0,.35,1);
+}
+.burger span:nth-child(1){top:0;}
+.burger span:nth-child(2){top:7px;}
+.burger span:nth-child(3){top:14px;}
+.burger.is-open span:nth-child(1){top:7px;transform:rotate(45deg);}
+.burger.is-open span:nth-child(2){opacity:0;}
+.burger.is-open span:nth-child(3){top:7px;transform:rotate(-45deg);}
+
+.mnav{position:fixed;inset:0;z-index:200;visibility:hidden;transition:visibility 0s linear .5s;}
+.mnav.is-open{visibility:visible;transition-delay:0s;}
+.mnav__overlay{
+  position:absolute;inset:0;background:rgba(10,10,9,0.28);
+  backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);
+  opacity:0;transition:opacity .4s ease;
+}
+.mnav.is-open .mnav__overlay{opacity:1;}
+.mnav__panel{
+  position:absolute;top:0;left:0;height:100%;width:min(360px,86vw);
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg);
+  box-shadow:16px 0 50px rgba(0,0,0,0.10);
+  transform:translateX(-100%);
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+  display:flex;flex-direction:column;
+  padding:24px 26px 20px;overflow-y:auto;
+}
+.mnav.is-open .mnav__panel{transform:translateX(0);}
+.mnav__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.mnav__close{
+  background:none;border:none;cursor:pointer;color:var(--cream);
+  display:flex;align-items:center;gap:8px;
+  font-family:'General Sans',sans-serif;font-weight:600;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.mnav__close span{font-size:16px;line-height:1;}
+.mnav__quick,.mnav__links{margin:0;padding:0;list-style:none;}
+.mnav__quick{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line-soft);}
+.mnav__quick li a{
+  display:block;padding:7px 0;font-weight:700;font-size:17px;
+  text-transform:uppercase;letter-spacing:-0.01em;
+}
+.mnav__links{margin-bottom:24px;}
+.mnav__links li a{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--line-soft);
+  font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.03em;
+}
+.mnav__links li a .chev{color:var(--gray);transition:transform .25s ease;}
+.mnav__links li a:hover .chev{transform:translateX(4px);}
+.mnav__quick li,.mnav__links li{
+  opacity:0;transform:translateY(10px);
+  transition:opacity .45s ease,transform .45s ease;
+}
+.mnav.is-open .mnav__quick li,.mnav.is-open .mnav__links li{opacity:1;transform:translateY(0);}
+.mnav.is-open .mnav__quick li:nth-child(1){transition-delay:.12s}
+.mnav.is-open .mnav__quick li:nth-child(2){transition-delay:.17s}
+.mnav.is-open .mnav__links li:nth-child(1){transition-delay:.22s}
+.mnav.is-open .mnav__links li:nth-child(2){transition-delay:.27s}
+.mnav.is-open .mnav__links li:nth-child(3){transition-delay:.32s}
+.mnav.is-open .mnav__links li:nth-child(4){transition-delay:.37s}
+.mnav.is-open .mnav__links li:nth-child(5){transition-delay:.42s}
+.mnav.is-open .mnav__links li:nth-child(6){transition-delay:.47s}
+.mnav.is-open .mnav__links li:nth-child(7){transition-delay:.52s}
+.mnav__drop{
+  margin-top:auto;padding-top:6px;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .45s ease .5s,transform .45s ease .5s;
+}
+.mnav.is-open .mnav__drop{opacity:1;transform:translateY(0);}
+.mnav__drop .eyebrow{margin-bottom:8px;}
+.mnav__drop-img{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.mnav__drop-label{
+  position:absolute;bottom:10px;left:10px;z-index:2;
+  background:rgba(18,18,18,0.65);color:#fff;
+  backdrop-filter:var(--blur-sm);
+  font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em;
+  padding:5px 10px;
+}
+.mnav__footer{
+  display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;padding-top:16px;
+  border-top:1px solid var(--line-soft);
+  opacity:0;transition:opacity .45s ease .58s;
+}
+.mnav.is-open .mnav__footer{opacity:1;}
+.mnav__footer a{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--gray);}
+.mnav__footer a:hover{color:var(--cream);}
+body.mnav-lock{overflow:hidden;}
+
+@media (max-width:640px){
+  .nav__icons{gap:2px;}
+  .split{grid-template-columns:1fr;}
+  .grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .hero__content{justify-content:center;padding-bottom:28px;}
+  .hero__panel{max-width:90%;text-align:center;}
+  .footer__top{grid-template-columns:1fr;}
+  .newsletter form{flex-direction:column;gap:10px;}
+  .newsletter input{border-right:1px solid var(--line);}
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="marquee"><div class="marquee__track">
+  <span>ENVÍO GRATIS DESDE $250.000</span>
+  <span>30 DÍAS PARA CAMBIOS</span>
+  <span>NUEVA COLECCIÓN DISPONIBLE</span>
+</div></div>
+
+<header class="site">
+  <nav class="nav">
+    <button class="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <a href="index.html" class="nav__logo nav__logo--mono">S.D.B.</a>
+    <div class="nav__icons">
+      <button class="icon-btn" aria-label="Buscar" type="button">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.4" y2="16.4"/></svg>
+      </button>
+      <a href="#" class="icon-btn" aria-label="Cuenta">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6.5 8-6.5s6.5 2 8 6.5"/></svg>
+      </a>
+      <a href="#" class="icon-btn" aria-label="Favoritos">
+        <svg viewBox="0 0 24 24"><path d="M12 20.5S3.5 15 3.5 9a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20.5 9c0 6-8.5 11.5-8.5 11.5Z"/></svg>
+      </a>
+      <a href="#" class="icon-btn icon-bag" aria-label="Bolsa">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="bag-count">0</span>
+      </a>
+    </div>
+  </nav>
+</header>
+<div class="mnav" id="mobileNav">
+  <div class="mnav__overlay" data-mnav-close></div>
+  <div class="mnav__panel">
+    <div class="mnav__top">
+      <a href="index.html" class="nav__logo">SERGIO <span>BENAVIDES</span></a>
+      <button class="mnav__close" data-mnav-close aria-label="Cerrar menú">Cerrar <span>&times;</span></button>
+    </div>
+    <ul class="mnav__quick">
+      <li><a href="coleccion.html">Nuevo</a></li>
+      <li><a href="coleccion.html">Ver todo</a></li>
+    </ul>
+    <ul class="mnav__links">
+      <li><a href="coleccion.html">Hombre <span class="chev">›</span></a></li>
+      <li><a href="coleccion.html">Mujer <span class="chev">›</span></a></li>
+      <li><a href="coleccion.html">Básicos &amp; Esenciales <span class="chev">›</span></a></li>
+      <li><a href="coleccion.html">Accesorios</a></li>
+      <li><a href="coleccion.html">Billeteras</a></li>
+      <li><a href="coleccion.html">Colecciones</a></li>
+      <li><a href="coleccion.html">Sale</a></li>
+    </ul>
+    <div class="mnav__drop">
+      <div class="eyebrow">Último drop</div>
+      <div class="mnav__drop-img ph" data-label="Foto del último drop">
+        <span class="mnav__drop-label">Billeteras en cuero</span>
+      </div>
+    </div>
+    <div class="mnav__footer">
+      <a href="#">Tiendas</a>
+      <a href="#">Cambios</a>
+      <a href="#">Términos &amp; Condiciones</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a><span>/</span><span>Nombre de la colección</span>
+  </div>
+
+  <div class="collection__head">
+    <div class="eyebrow">Drop 01</div>
+    <h1>NOMBRE DE<br>LA COLECCIÓN</h1>
+    <p>Descripción corta de la colección: de qué trata, materiales, inspiración. 1–2 líneas.</p>
+  </div>
+
+  <div class="toolbar">
+    <span id="count">24 productos</span>
+    <select>
+      <option>Ordenar por: Destacados</option>
+      <option>Precio: menor a mayor</option>
+      <option>Precio: mayor a menor</option>
+      <option>Más recientes</option>
+    </select>
+  </div>
+
+  <div class="grid" id="product-grid">
+    <!-- ================================================
+         PLANTILLA DE PRODUCTO — copia este bloque <div class="card">…</div>
+         tantas veces como prendas quieras mostrar
+         ================================================ -->
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <span class="card__badge">Nuevo</span>
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <span class="card__badge">Últimas unidades</span>
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <span class="card__badge">Agotado</span>
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="producto.html" class="overlay" aria-label="Ver producto"></a>
+      <div class="card__img">
+        <div class="ph" data-label="Foto producto 1200×1600"></div>
+        <div class="card__cta">Ver producto</div>
+      </div>
+      <div class="card__info">
+        <div class="card__name">Nombre de la prenda</div>
+        <div class="card__price">$000.000 COP</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="newsletter" style="margin-top:60px;">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:14px;">Únete al estudio</div>
+    <h2>SÉ EL PRIMERO EN VER<br>CADA NUEVO DROP</h2>
+    <form>
+      <input type="email" placeholder="tu@correo.com" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">SERGIO <span>BENAVIDES</span></a>
+        <p>Marca de streetwear colombiano. Prendas de alto gramaje, producción limitada, hechas para durar.</p>
+      </div>
+      <div class="footer__col">
+        <h5>Marca</h5>
+        <a href="#">Acerca de</a>
+        <a href="#">Lookbook</a>
+        <a href="#">Prensa</a>
+      </div>
+      <div class="footer__col">
+        <h5>Compañía</h5>
+        <a href="#">Tiendas</a>
+        <a href="#">Trabaja con nosotros</a>
+      </div>
+      <div class="footer__col">
+        <h5>Servicio al cliente</h5>
+        <a href="#">Cambios y devoluciones</a>
+        <a href="#">Políticas</a>
+        <a href="#">Tratamiento de datos</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 S.D.B. Studio®</span>
+      <span>Bogotá · Colombia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Duplica el contenido del marquee para el loop infinito
+document.querySelectorAll('.marquee__track').forEach(track=>{
+  const original = track.innerHTML;
+  let safety = 0;
+  while(track.scrollWidth < window.innerWidth * 2 && safety < 12){
+    track.innerHTML += original;
+    safety++;
+  }
+});
+
+// Menú móvil simple
+const burger = document.querySelector('.burger');
+const mobileNav = document.getElementById('mobileNav');
+function openMobileNav(){
+  burger.classList.add('is-open');
+  mobileNav.classList.add('is-open');
+  document.body.classList.add('mnav-lock');
+}
+function closeMobileNav(){
+  burger.classList.remove('is-open');
+  mobileNav.classList.remove('is-open');
+  document.body.classList.remove('mnav-lock');
+}
+if(burger && mobileNav){
+  burger.addEventListener('click', ()=>{
+    mobileNav.classList.contains('is-open') ? closeMobileNav() : openMobileNav();
+  });
+  mobileNav.querySelectorAll('[data-mnav-close]').forEach(el=>{
+    el.addEventListener('click', closeMobileNav);
+  });
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape') closeMobileNav();
+  });
+}
+
+// Selector de tallas (página producto)
+document.querySelectorAll('.sizes').forEach(group=>{
+  group.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      group.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+});
+
+// Contador de cantidad (página producto)
+document.querySelectorAll('.qty').forEach(qty=>{
+  const span = qty.querySelector('span');
+  let n = 1;
+  qty.querySelector('.minus').addEventListener('click', ()=>{
+    if(n>1){n--; span.textContent=n;}
+  });
+  qty.querySelector('.plus').addEventListener('click', ()=>{
+    n++; span.textContent=n;
+  });
+});
+
+// Newsletter (demo, sin backend real)
+document.querySelectorAll('.newsletter form').forEach(f=>{
+  f.addEventListener('submit', e=>{
+    e.preventDefault();
+    const btn = f.querySelector('button');
+    const original = btn.textContent;
+    btn.textContent = '¡Listo!';
+    setTimeout(()=>btn.textContent = original, 1800);
+    f.reset();
+  });
+});
+
+</script>
+</body>
+</html>
